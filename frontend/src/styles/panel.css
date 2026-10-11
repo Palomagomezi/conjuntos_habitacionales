@@ -1,0 +1,170 @@
+.panel {
+  display: flex;
+  min-height: 100vh;
+}
+
+.panel-menu {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-sidebar);
+  color: #f3eee7;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+}
+
+.panel-marca {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.25rem;
+  padding: 0 0.5rem;
+}
+
+.panel-rol {
+  font-size: 0.75rem;
+  color: #bdb5a9;
+  margin: 0 0 1.75rem;
+  padding: 0 0.5rem;
+}
+
+.panel-enlaces {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.panel-enlace {
+  color: #d9d2c7;
+  text-decoration: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.panel-enlace:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.panel-enlace.active {
+  background: var(--color-acento);
+  color: #fff;
+}
+
+.panel-usuario {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0.5rem 0;
+}
+
+.panel-usuario-nombre {
+  font-size: 0.85rem;
+  color: #fff;
+  margin: 0;
+}
+
+.panel-usuario-correo {
+  font-size: 0.75rem;
+  color: #bdb5a9;
+  margin: 0.15rem 0 0.75rem;
+  word-break: break-all;
+}
+
+.panel-usuario .panel-enlace {
+  display: block;
+  padding: 0.4rem 0;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.panel-salir {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f3eee7;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.panel-salir:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.panel-contenido {
+  flex: 1;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.encabezado h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.encabezado p {
+  color: var(--color-texto-suave);
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+}
+
+.tarjetas-inicio {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.tarjeta-acceso {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tarjeta-acceso:hover {
+  border-color: var(--color-acento);
+}
+
+.tarjeta-acceso h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.tarjeta-acceso p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+@media (max-width: 768px) {
+  .panel {
+    flex-direction: column;
+  }
+
+  .panel-menu {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .panel-rol {
+    margin-bottom: 1rem;
+  }
+
+  .panel-enlaces {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .panel-contenido {
+    padding: 1.25rem;
+  }
+}
