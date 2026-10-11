@@ -1,0 +1,53 @@
+.auth-fondo {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-tarjeta {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 2rem 1.75rem;
+  box-shadow: 0 1px 3px rgba(58, 46, 40, 0.08);
+}
+
+.auth-marca {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-acento);
+  margin: 0 0 1.25rem;
+}
+
+.auth-titulo {
+  font-size: 1.4rem;
+  margin: 0 0 0.35rem;
+}
+
+.auth-subtitulo {
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+  margin: 0 0 1.5rem;
+}
+
+.auth-boton-completo {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.auth-pie {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+  margin: 1.25rem 0 0;
+}
+
+.auth-pie a {
+  color: var(--color-acento);
+  font-weight: 500;
+  text-decoration: none;
+}
