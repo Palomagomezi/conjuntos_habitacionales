@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-acento: #c1653f;
+  --color-acento-hover: #a8532f;
+  --color-acento-suave: #f6e6dd;
+  --color-fondo: #faf7f2;
+  --color-tarjeta: #ffffff;
+  --color-borde: #e8e1d7;
+  --color-texto: #2b2823;
+  --color-texto-suave: #6f685e;
+  --color-sidebar: #3a362f;
+  --color-exito: #3f7d4e;
+  --color-exito-suave: #e3f0e6;
+  --color-alerta: #b7791f;
+  --color-alerta-suave: #f8ecd4;
+  --color-error: #b3412f;
+  --color-error-suave: #f7e1dc;
+  --fuente-base: 'Inter', system-ui, sans-serif;
+  --radio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-base);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+.tarjeta {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+}
+
+.boton {
+  background: var(--color-acento);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--color-acento-hover);
+}
+
+.boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.boton-secundario {
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.campo input,
+.campo select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: #fff;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--color-acento-suave);
+  border-color: var(--color-acento);
+}
+
+.mensaje-error {
+  background: var(--color-error-suave);
+  color: var(--color-error);
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.mensaje-exito {
+  background: var(--color-exito-suave);
+  color: var(--color-exito);
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
