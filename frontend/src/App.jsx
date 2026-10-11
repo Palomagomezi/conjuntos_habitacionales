@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Registro from './pages/Registro';
 import CambiarPassword from './pages/CambiarPassword';
 import InicioAdmin from './pages/admin/InicioAdmin';
+import Unidades from './pages/admin/Unidades';
 import InicioResidente from './pages/residente/InicioResidente';
 
 function Temporal({ texto }) {
@@ -36,7 +37,7 @@ export default function App() {
             }
           >
             <Route index element={<InicioAdmin />} />
-            <Route path="unidades" element={<Temporal texto="Unidades" />} />
+            <Route path="unidades" element={<Unidades />} />
             <Route path="residentes" element={<Temporal texto="Residentes" />} />
           </Route>
 
