@@ -249,3 +249,13 @@ body {
   gap: 0.5rem;
   margin-top: 1.5rem;
 }
+
+.fila-inactiva td {
+  color: var(--color-texto-suave);
+}
+
+.ayuda {
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+  margin: 0;
+}

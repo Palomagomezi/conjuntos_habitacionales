@@ -7,16 +7,8 @@ import Registro from './pages/Registro';
 import CambiarPassword from './pages/CambiarPassword';
 import InicioAdmin from './pages/admin/InicioAdmin';
 import Unidades from './pages/admin/Unidades';
+import Residentes from './pages/admin/Residentes';
 import InicioResidente from './pages/residente/InicioResidente';
-
-function Temporal({ texto }) {
-  return (
-    <div className="tarjeta">
-      <h2>{texto}</h2>
-      <p>Pantalla en construcción.</p>
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -38,7 +30,7 @@ export default function App() {
           >
             <Route index element={<InicioAdmin />} />
             <Route path="unidades" element={<Unidades />} />
-            <Route path="residentes" element={<Temporal texto="Residentes" />} />
+            <Route path="residentes" element={<Residentes />} />
           </Route>
 
           <Route
