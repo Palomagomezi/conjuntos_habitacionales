@@ -86,3 +86,36 @@ export async function iniciarSesion(req, res) {
     res.status(500).json({ mensaje: 'Error al iniciar sesión' });
   }
 }
+
+export async function cambiarPassword(req, res) {
+  const { passwordActual, passwordNueva } = req.body;
+
+  if (!passwordActual || !passwordNueva) {
+    return res.status(400).json({ mensaje: 'Ambas contraseñas son obligatorias' });
+  }
+  if (passwordNueva.length < 8) {
+    return res.status(400).json({ mensaje: 'La nueva contraseña debe tener al menos 8 caracteres' });
+  }
+
+  try {
+    const resultado = await pool.query(
+      'SELECT password_hash FROM usuarios WHERE id = $1',
+      [req.usuario.id]
+    );
+    const usuario = resultado.rows[0];
+
+    if (!usuario || !(await bcrypt.compare(passwordActual, usuario.password_hash))) {
+      return res.status(401).json({ mensaje: 'La contraseña actual es incorrecta' });
+    }
+
+    const hash = await bcrypt.hash(passwordNueva, 10);
+    await pool.query(
+      'UPDATE usuarios SET password_hash = $1, debe_cambiar_password = FALSE WHERE id = $2',
+      [hash, req.usuario.id]
+    );
+    res.json({ mensaje: 'Contraseña actualizada correctamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al cambiar la contraseña' });
+  }
+}
