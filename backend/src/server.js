@@ -5,6 +5,7 @@ import pool from './db.js';
 import authRoutes from './routes/auth.routes.js';
 import unidadesRoutes from './routes/unidades.routes.js';
 import residentesRoutes from './routes/residentes.routes.js';
+import cuotasRoutes from './routes/cuotas.routes.js';
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/unidades', unidadesRoutes);
 app.use('/api/residentes', residentesRoutes);
+app.use('/api/cuotas', cuotasRoutes);
 
 app.get('/api/salud', async (req, res) => {
   try {

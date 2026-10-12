@@ -85,6 +85,11 @@ export async function eliminarUnidad(req, res) {
     }
     res.json({ mensaje: 'Unidad eliminada correctamente' });
   } catch (error) {
+    if (error.code === '23503') {
+      return res.status(409).json({
+        mensaje: 'No se puede eliminar: la unidad tiene cuotas registradas',
+      });
+    }
     console.error(error);
     res.status(500).json({ mensaje: 'Error al eliminar la unidad' });
   }
