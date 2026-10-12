@@ -259,3 +259,34 @@ body {
   color: var(--color-texto-suave);
   margin: 0;
 }
+
+.filtros {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filtros .campo {
+  margin-bottom: 0;
+}
+
+.insignia-alerta {
+  background: #fdf1dc;
+  color: #8a5a12;
+}
+
+.insignia-peligro {
+  background: #fbe4e1;
+  color: #a2362a;
+}
+
+.resumen-pago {
+  background: #faf7f2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

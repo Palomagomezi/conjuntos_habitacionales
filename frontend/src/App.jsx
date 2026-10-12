@@ -8,6 +8,7 @@ import CambiarPassword from './pages/CambiarPassword';
 import InicioAdmin from './pages/admin/InicioAdmin';
 import Unidades from './pages/admin/Unidades';
 import Residentes from './pages/admin/Residentes';
+import Cuotas from './pages/admin/Cuotas';
 import InicioResidente from './pages/residente/InicioResidente';
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
             <Route index element={<InicioAdmin />} />
             <Route path="unidades" element={<Unidades />} />
             <Route path="residentes" element={<Residentes />} />
+            <Route path="cuotas" element={<Cuotas />} />
           </Route>
 
           <Route

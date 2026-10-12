@@ -7,6 +7,7 @@ const MENUS = {
     { ruta: '/admin', texto: 'Inicio', exacta: true },
     { ruta: '/admin/unidades', texto: 'Unidades' },
     { ruta: '/admin/residentes', texto: 'Residentes' },
+    { ruta: '/admin/cuotas', texto: 'Cuotas' },
   ],
   residente: [{ ruta: '/residente', texto: 'Inicio', exacta: true }],
 };
