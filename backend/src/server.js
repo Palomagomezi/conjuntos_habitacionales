@@ -8,6 +8,7 @@ import residentesRoutes from './routes/residentes.routes.js';
 import cuotasRoutes from './routes/cuotas.routes.js';
 import pagosRoutes from './routes/pagos.routes.js';
 import egresosRoutes from './routes/egresos.routes.js';
+import finanzasRoutes from './routes/finanzas.routes.js';
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use('/api/residentes', residentesRoutes);
 app.use('/api/cuotas', cuotasRoutes);
 app.use('/api/pagos', pagosRoutes);
 app.use('/api/egresos', egresosRoutes);
+app.use('/api/finanzas', finanzasRoutes);
 
 app.get('/api/salud', async (req, res) => {
   try {
