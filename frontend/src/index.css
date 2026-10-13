@@ -392,3 +392,14 @@ body {
     max-width: none;
   }
 }
+
+.campo textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ddd5ca;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 70px;
+}

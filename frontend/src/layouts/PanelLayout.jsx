@@ -8,6 +8,7 @@ const MENUS = {
     { ruta: '/admin/unidades', texto: 'Unidades' },
     { ruta: '/admin/residentes', texto: 'Residentes' },
     { ruta: '/admin/cuotas', texto: 'Cuotas' },
+    { ruta: '/admin/egresos', texto: 'Egresos' },
   ],
   residente: [{ ruta: '/residente', texto: 'Inicio', exacta: true }],
 };

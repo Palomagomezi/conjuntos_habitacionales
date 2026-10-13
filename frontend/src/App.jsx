@@ -9,6 +9,7 @@ import InicioAdmin from './pages/admin/InicioAdmin';
 import Unidades from './pages/admin/Unidades';
 import Residentes from './pages/admin/Residentes';
 import Cuotas from './pages/admin/Cuotas';
+import Egresos from './pages/admin/Egresos';
 import Comprobante from './pages/Comprobante';
 import InicioResidente from './pages/residente/InicioResidente';
 
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="unidades" element={<Unidades />} />
             <Route path="residentes" element={<Residentes />} />
             <Route path="cuotas" element={<Cuotas />} />
+            <Route path="egresos" element={<Egresos />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
 
