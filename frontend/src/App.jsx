@@ -9,6 +9,7 @@ import InicioAdmin from './pages/admin/InicioAdmin';
 import Unidades from './pages/admin/Unidades';
 import Residentes from './pages/admin/Residentes';
 import Cuotas from './pages/admin/Cuotas';
+import Comprobante from './pages/Comprobante';
 import InicioResidente from './pages/residente/InicioResidente';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="unidades" element={<Unidades />} />
             <Route path="residentes" element={<Residentes />} />
             <Route path="cuotas" element={<Cuotas />} />
+            <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
 
           <Route
@@ -44,6 +46,7 @@ export default function App() {
             }
           >
             <Route index element={<InicioResidente />} />
+            <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
         </Routes>
       </AuthProvider>

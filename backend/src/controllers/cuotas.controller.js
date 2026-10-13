@@ -15,14 +15,15 @@ export async function listarCuotas(req, res) {
   try {
     const resultado = await pool.query(
       `SELECT c.id, c.concepto, c.periodo, c.monto, c.fecha_limite, c.estado,
-              u.id AS unidad_id, u.torre, u.numero,
+              u.id AS unidad_id, u.torre, u.numero, p.id AS pago_id,
               COALESCE(string_agg(us.nombre, ', '), '') AS residentes
        FROM cuotas c
        JOIN unidades u ON u.id = c.unidad_id
+       LEFT JOIN pagos p ON p.cuota_id = c.id
        LEFT JOIN usuarios us
          ON us.unidad_id = u.id AND us.activo = TRUE AND us.rol = 'residente'
        WHERE c.conjunto_id = $1 ${filtro}
-       GROUP BY c.id, u.id
+       GROUP BY c.id, u.id, p.id
        ORDER BY c.periodo DESC, u.torre, u.numero`,
       parametros
     );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
 import {
@@ -182,7 +183,8 @@ export default function Cuotas() {
           />
         </div>
         <p className="texto-suave">
-          {pendientes.length} pendientes · {dinero(porCobrar)} por cobrar
+          {pendientes.length} {pendientes.length === 1 ? 'pendiente' : 'pendientes'} ·{' '}
+          {dinero(porCobrar)} por cobrar
         </p>
       </div>
 
@@ -229,6 +231,11 @@ export default function Cuotas() {
                           Eliminar
                         </button>
                       </>
+                    )}
+                    {cuota.estado === 'pagada' && cuota.pago_id && (
+                      <Link className="boton-enlace" to={`/admin/comprobante/${cuota.pago_id}`}>
+                        Ver comprobante
+                      </Link>
                     )}
                   </td>
                 </tr>
