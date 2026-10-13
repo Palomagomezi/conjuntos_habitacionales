@@ -403,3 +403,35 @@ body {
   resize: vertical;
   min-height: 70px;
 }
+
+.tarjetas-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumen-etiqueta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+.resumen-valor {
+  margin: 0.35rem 0 0.15rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.valor-positivo {
+  color: #2f7a4d;
+}
+
+.valor-negativo {
+  color: #a2362a;
+}
+
+.subtitulo-seccion {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}

@@ -7,6 +7,7 @@ const MENUS = {
     { ruta: '/admin', texto: 'Inicio', exacta: true },
     { ruta: '/admin/unidades', texto: 'Unidades' },
     { ruta: '/admin/residentes', texto: 'Residentes' },
+    { ruta: '/admin/finanzas', texto: 'Finanzas' },
     { ruta: '/admin/cuotas', texto: 'Cuotas' },
     { ruta: '/admin/egresos', texto: 'Egresos' },
   ],
