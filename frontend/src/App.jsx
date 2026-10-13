@@ -13,6 +13,7 @@ import Egresos from './pages/admin/Egresos';
 import Finanzas from './pages/admin/Finanzas';
 import Comprobante from './pages/Comprobante';
 import InicioResidente from './pages/residente/InicioResidente';
+import EstadoCuenta from './pages/residente/EstadoCuenta';
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
             }
           >
             <Route index element={<InicioResidente />} />
+            <Route path="estado-cuenta" element={<EstadoCuenta />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
         </Routes>

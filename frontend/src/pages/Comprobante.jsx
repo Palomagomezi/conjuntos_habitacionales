@@ -30,7 +30,7 @@ export default function Comprobante() {
     };
   }, [id]);
 
-  const regresar = usuario.rol === 'administrador' ? '/admin/cuotas' : '/residente';
+   const regresar = usuario.rol === 'administrador' ? '/admin/cuotas' : '/residente/estado-cuenta';
 
   if (error) {
     return (
