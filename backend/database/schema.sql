@@ -75,3 +75,65 @@ CREATE TABLE IF NOT EXISTS egresos (
   registrado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
   creado_en TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS avisos (
+  id SERIAL PRIMARY KEY,
+  conjunto_id INTEGER NOT NULL REFERENCES conjuntos(id) ON DELETE CASCADE,
+  titulo VARCHAR(150) NOT NULL,
+  contenido TEXT NOT NULL,
+  prioridad VARCHAR(20) NOT NULL DEFAULT 'normal'
+    CHECK (prioridad IN ('normal', 'importante', 'urgente')),
+  publicado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  creado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS avisos_lecturas (
+  aviso_id INTEGER NOT NULL REFERENCES avisos(id) ON DELETE CASCADE,
+  usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+  leido_en TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY (aviso_id, usuario_id)
+);
+
+CREATE TABLE IF NOT EXISTS asambleas (
+  id SERIAL PRIMARY KEY,
+  conjunto_id INTEGER NOT NULL REFERENCES conjuntos(id) ON DELETE CASCADE,
+  titulo VARCHAR(150) NOT NULL,
+  tipo VARCHAR(20) NOT NULL DEFAULT 'ordinaria'
+    CHECK (tipo IN ('ordinaria', 'extraordinaria')),
+  fecha TIMESTAMP NOT NULL,
+  lugar VARCHAR(150) NOT NULL,
+  orden_del_dia TEXT NOT NULL,
+  estado VARCHAR(20) NOT NULL DEFAULT 'programada'
+    CHECK (estado IN ('programada', 'realizada', 'cancelada')),
+  acuerdos TEXT,
+  creado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  creado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS votaciones (
+  id SERIAL PRIMARY KEY,
+  conjunto_id INTEGER NOT NULL REFERENCES conjuntos(id) ON DELETE CASCADE,
+  asamblea_id INTEGER REFERENCES asambleas(id) ON DELETE SET NULL,
+  pregunta VARCHAR(255) NOT NULL,
+  descripcion TEXT,
+  fecha_cierre TIMESTAMP NOT NULL,
+  cerrada BOOLEAN NOT NULL DEFAULT FALSE,
+  creado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  creado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS opciones_votacion (
+  id SERIAL PRIMARY KEY,
+  votacion_id INTEGER NOT NULL REFERENCES votaciones(id) ON DELETE CASCADE,
+  texto VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS votos (
+  id SERIAL PRIMARY KEY,
+  votacion_id INTEGER NOT NULL REFERENCES votaciones(id) ON DELETE CASCADE,
+  opcion_id INTEGER NOT NULL REFERENCES opciones_votacion(id) ON DELETE CASCADE,
+  unidad_id INTEGER NOT NULL REFERENCES unidades(id),
+  usuario_id INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  emitido_en TIMESTAMP DEFAULT NOW(),
+  UNIQUE (votacion_id, unidad_id)
+);
