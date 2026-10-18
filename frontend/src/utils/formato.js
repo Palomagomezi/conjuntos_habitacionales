@@ -35,3 +35,8 @@ export function nombreUnidad(torre, numero) {
   if (!numero) return '';
   return torre ? `${torre}-${numero}` : numero;
 }
+
+export function formatoFechaHora(texto) {
+  if (!texto) return '—';
+  return `${formatoFecha(texto)}, ${texto.slice(11, 16)} h`;
+}

@@ -10,12 +10,14 @@ const MENUS = {
     { ruta: '/admin/finanzas', texto: 'Finanzas' },
     { ruta: '/admin/cuotas', texto: 'Cuotas' },
     { ruta: '/admin/egresos', texto: 'Egresos' },
+    { ruta: '/admin/avisos', texto: 'Avisos' },
   ],
   residente: [
     { ruta: '/residente', texto: 'Inicio', exacta: true },
     { ruta: '/residente/estado-cuenta', texto: 'Estado de cuenta' },
-    ],
-  };
+    { ruta: '/residente/avisos', texto: 'Avisos' },
+  ],
+};
 
 export default function PanelLayout() {
   const { usuario, cerrarSesion } = useAuth();

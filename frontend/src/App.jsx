@@ -11,9 +11,11 @@ import Residentes from './pages/admin/Residentes';
 import Cuotas from './pages/admin/Cuotas';
 import Egresos from './pages/admin/Egresos';
 import Finanzas from './pages/admin/Finanzas';
+import Avisos from './pages/admin/Avisos';
 import Comprobante from './pages/Comprobante';
 import InicioResidente from './pages/residente/InicioResidente';
 import EstadoCuenta from './pages/residente/EstadoCuenta';
+import AvisosResidente from './pages/residente/AvisosResidente';
 
 export default function App() {
   return (
@@ -39,6 +41,7 @@ export default function App() {
             <Route path="cuotas" element={<Cuotas />} />
             <Route path="egresos" element={<Egresos />} />
             <Route path="finanzas" element={<Finanzas />} />
+            <Route path="avisos" element={<Avisos />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
 
@@ -52,6 +55,7 @@ export default function App() {
           >
             <Route index element={<InicioResidente />} />
             <Route path="estado-cuenta" element={<EstadoCuenta />} />
+            <Route path="avisos" element={<AvisosResidente />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
         </Routes>
