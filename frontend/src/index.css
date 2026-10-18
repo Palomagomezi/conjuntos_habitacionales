@@ -602,3 +602,59 @@ body {
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
+
+.modal-amplio {
+  max-width: 600px;
+}
+
+.detalle-insignias {
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.detalle-titulo {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.historial {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--color-borde);
+}
+
+.historial-paso {
+  position: relative;
+  padding: 0 0 1rem 0.75rem;
+}
+
+.historial-paso::before {
+  content: '';
+  position: absolute;
+  left: calc(-1rem - 6px);
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-acento);
+}
+
+.historial-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.historial-comentario {
+  margin: 0.4rem 0 0.2rem;
+  font-size: 0.9rem;
+  white-space: pre-line;
+}
+
+.formulario-seguimiento {
+  border-top: 1px solid var(--color-borde);
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+}

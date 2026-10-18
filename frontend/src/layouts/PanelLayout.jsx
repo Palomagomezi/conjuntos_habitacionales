@@ -13,6 +13,7 @@ const MENUS = {
     { ruta: '/admin/avisos', texto: 'Avisos' },
     { ruta: '/admin/asambleas', texto: 'Asambleas' },
     { ruta: '/admin/votaciones', texto: 'Votaciones' },
+    { ruta: '/admin/mantenimiento', texto: 'Mantenimiento' },
   ],
   residente: [
     { ruta: '/residente', texto: 'Inicio', exacta: true },
@@ -20,6 +21,7 @@ const MENUS = {
     { ruta: '/residente/avisos', texto: 'Avisos' },
     { ruta: '/residente/asambleas', texto: 'Asambleas' },
     { ruta: '/residente/votaciones', texto: 'Votaciones' },
+    { ruta: '/residente/reportes', texto: 'Mantenimiento' },
   ],
 };
 
