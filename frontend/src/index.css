@@ -493,3 +493,112 @@ body {
   border-top: 1px solid var(--color-borde);
   padding-top: 0.75rem;
 }
+
+.asamblea-datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.asamblea-datos dt {
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+}
+
+.asamblea-datos dd {
+  margin: 0.15rem 0 0;
+  font-weight: 500;
+}
+
+.asamblea-subtitulo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-texto-suave);
+  margin: 0;
+}
+
+.asamblea-acuerdos {
+  background: #faf7f2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.votacion-datos {
+  margin: 0.5rem 0 1rem;
+}
+
+.resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.resultado-etiqueta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.resultado-mio {
+  margin-left: 0.5rem;
+}
+
+.barra {
+  height: 8px;
+  background: #eeeae4;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  background: var(--color-acento);
+  border-radius: 999px;
+}
+
+.opciones-voto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.opcion-voto {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.opcion-voto:has(input:checked) {
+  border-color: var(--color-acento);
+  background: var(--color-acento-suave);
+}
+
+.opcion-fila {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.opcion-fila input {
+  flex: 1;
+}
+
+.voto-emitido {
+  background: #faf7f2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}

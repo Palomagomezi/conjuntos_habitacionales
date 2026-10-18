@@ -40,3 +40,10 @@ export function formatoFechaHora(texto) {
   if (!texto) return '—';
   return `${formatoFecha(texto)}, ${texto.slice(11, 16)} h`;
 }
+
+export function ahoraLocal() {
+  const fecha = new Date();
+  const hora = String(fecha.getHours()).padStart(2, '0');
+  const minutos = String(fecha.getMinutes()).padStart(2, '0');
+  return `${hoy()}T${hora}:${minutos}`;
+}

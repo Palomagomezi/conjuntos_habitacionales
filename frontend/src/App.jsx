@@ -12,10 +12,14 @@ import Cuotas from './pages/admin/Cuotas';
 import Egresos from './pages/admin/Egresos';
 import Finanzas from './pages/admin/Finanzas';
 import Avisos from './pages/admin/Avisos';
+import Asambleas from './pages/admin/Asambleas';
+import Votaciones from './pages/admin/Votaciones';
 import Comprobante from './pages/Comprobante';
 import InicioResidente from './pages/residente/InicioResidente';
 import EstadoCuenta from './pages/residente/EstadoCuenta';
 import AvisosResidente from './pages/residente/AvisosResidente';
+import AsambleasResidente from './pages/residente/AsambleasResidente';
+import VotacionesResidente from './pages/residente/VotacionesResidente';
 
 export default function App() {
   return (
@@ -42,6 +46,8 @@ export default function App() {
             <Route path="egresos" element={<Egresos />} />
             <Route path="finanzas" element={<Finanzas />} />
             <Route path="avisos" element={<Avisos />} />
+            <Route path="asambleas" element={<Asambleas />} />
+            <Route path="votaciones" element={<Votaciones />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
 
@@ -56,6 +62,8 @@ export default function App() {
             <Route index element={<InicioResidente />} />
             <Route path="estado-cuenta" element={<EstadoCuenta />} />
             <Route path="avisos" element={<AvisosResidente />} />
+            <Route path="asambleas" element={<AsambleasResidente />} />
+            <Route path="votaciones" element={<VotacionesResidente />} />
             <Route path="comprobante/:id" element={<Comprobante />} />
           </Route>
         </Routes>
