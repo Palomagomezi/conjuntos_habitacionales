@@ -137,3 +137,31 @@ CREATE TABLE IF NOT EXISTS votos (
   emitido_en TIMESTAMP DEFAULT NOW(),
   UNIQUE (votacion_id, unidad_id)
 );
+
+CREATE TABLE IF NOT EXISTS reportes (
+  id SERIAL PRIMARY KEY,
+  conjunto_id INTEGER NOT NULL REFERENCES conjuntos(id) ON DELETE CASCADE,
+  unidad_id INTEGER REFERENCES unidades(id) ON DELETE SET NULL,
+  reportado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  titulo VARCHAR(150) NOT NULL,
+  descripcion TEXT NOT NULL,
+  ubicacion VARCHAR(150) NOT NULL,
+  categoria VARCHAR(30) NOT NULL
+    CHECK (categoria IN ('plomeria', 'electricidad', 'jardineria', 'limpieza', 'seguridad', 'estructura', 'otro')),
+  prioridad VARCHAR(20) NOT NULL DEFAULT 'media'
+    CHECK (prioridad IN ('baja', 'media', 'alta')),
+  estado VARCHAR(20) NOT NULL DEFAULT 'recibido'
+    CHECK (estado IN ('recibido', 'en_proceso', 'resuelto', 'rechazado')),
+  creado_en TIMESTAMP DEFAULT NOW(),
+  actualizado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS reportes_seguimiento (
+  id SERIAL PRIMARY KEY,
+  reporte_id INTEGER NOT NULL REFERENCES reportes(id) ON DELETE CASCADE,
+  estado VARCHAR(20) NOT NULL
+    CHECK (estado IN ('recibido', 'en_proceso', 'resuelto', 'rechazado')),
+  comentario TEXT,
+  registrado_por INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  creado_en TIMESTAMP DEFAULT NOW()
+);

@@ -12,6 +12,7 @@ import finanzasRoutes from './routes/finanzas.routes.js';
 import avisosRoutes from './routes/avisos.routes.js';
 import asambleasRoutes from './routes/asambleas.routes.js';
 import votacionesRoutes from './routes/votaciones.routes.js';
+import reportesRoutes from './routes/reportes.routes.js';
 
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.use('/api/finanzas', finanzasRoutes);
 app.use('/api/avisos', avisosRoutes);
 app.use('/api/asambleas', asambleasRoutes);
 app.use('/api/votaciones', votacionesRoutes);
+app.use('/api/reportes', reportesRoutes);
 
 app.get('/api/salud', async (req, res) => {
   try {
