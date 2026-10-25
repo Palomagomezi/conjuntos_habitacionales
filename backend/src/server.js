@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import 'dotenv/config';
 import pool from './db.js';
 import authRoutes from './routes/auth.routes.js';
@@ -15,8 +17,31 @@ import votacionesRoutes from './routes/votaciones.routes.js';
 import reportesRoutes from './routes/reportes.routes.js';
 
 const app = express();
-app.use(cors());
+
+//Railway pasa las peticiones por un proxy; esto permite saber la IP real de cada usuario
+app.set('trust proxy', 1);
+
+app.use(helmet());
+
+//En producción solo se aceptan peticiones del frontend indicado en FRONTEND_URL
+const origenes = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((url) => url.trim())
+  : true;
+app.use(cors({ origin: origenes }));
+
 app.use(express.json());
+
+const limiteAuth = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { mensaje: 'Demasiados intentos, espera 15 minutos e inténtalo de nuevo' },
+});
+
+app.use('/api/auth/login', limiteAuth);
+app.use('/api/auth/register', limiteAuth);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/unidades', unidadesRoutes);
 app.use('/api/residentes', residentesRoutes);
@@ -34,7 +59,8 @@ app.get('/api/salud', async (req, res) => {
     const resultado = await pool.query('SELECT NOW()');
     res.json({ ok: true, hora: resultado.rows[0].now });
   } catch (error) {
-    res.status(500).json({ ok: false, error: error.message });
+    console.error(error);
+    res.status(500).json({ ok: false });
   }
 });
 
