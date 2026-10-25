@@ -14,6 +14,13 @@ export async function peticion(ruta, { metodo = 'GET', datos } = {}) {
 
   const contenido = await respuesta.json().catch(() => ({}));
 
+   if (respuesta.status === 401 && token) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    window.location.href = '/login';
+    return;
+  }
+
   if (!respuesta.ok) {
     throw new Error(contenido.mensaje || 'Ocurrió un error');
   }
