@@ -94,3 +94,39 @@ export async function eliminarUnidad(req, res) {
     res.status(500).json({ mensaje: 'Error al eliminar la unidad' });
   }
 }
+
+export async function crearUnidadesLote(req, res) {
+  const { torre = '', desde, hasta, tipo } = req.body;
+  const inicio = Number(desde);
+  const fin = Number(hasta);
+
+  if (!TIPOS.includes(tipo) || !Number.isInteger(inicio) || !Number.isInteger(fin)) {
+    return res.status(400).json({ mensaje: 'El rango y el tipo (casa o departamento) son obligatorios' });
+  }
+  if (inicio < 1 || fin < inicio) {
+    return res.status(400).json({ mensaje: 'El número final debe ser mayor o igual al inicial' });
+  }
+  if (fin - inicio + 1 > 500) {
+    return res.status(400).json({ mensaje: 'Puedes crear máximo 500 unidades a la vez' });
+  }
+
+  try {
+    const resultado = await pool.query(
+      `INSERT INTO unidades (conjunto_id, torre, numero, tipo)
+       SELECT $1, $2, n::text, $5
+       FROM generate_series($3::int, $4::int) AS n
+       ON CONFLICT (conjunto_id, torre, numero) DO NOTHING
+       RETURNING id`,
+      [req.usuario.conjunto_id, torre.trim(), inicio, fin, tipo]
+    );
+
+    const total = fin - inicio + 1;
+    res.status(201).json({
+      creadas: resultado.rowCount,
+      omitidas: total - resultado.rowCount,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al crear las unidades' });
+  }
+}

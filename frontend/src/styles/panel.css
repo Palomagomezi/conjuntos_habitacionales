@@ -168,3 +168,9 @@
     padding: 1.25rem;
   }
 }
+
+.encabezado-acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

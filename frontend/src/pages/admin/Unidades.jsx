@@ -3,6 +3,7 @@ import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
 
 const FORM_VACIO = { torre: '', numero: '', tipo: 'casa' };
+const LOTE_VACIO = { torre: '', desde: '1', hasta: '', tipo: 'casa' };
 
 export default function Unidades() {
   const [unidades, setUnidades] = useState([]);
@@ -15,6 +16,9 @@ export default function Unidades() {
   const [errorForm, setErrorForm] = useState('');
   const [guardando, setGuardando] = useState(false);
   const [recarga, setRecarga] = useState(0);
+  const [loteAbierto, setLoteAbierto] = useState(false);
+  const [lote, setLote] = useState(LOTE_VACIO);
+  const [errorLote, setErrorLote] = useState('');
 
   useEffect(() => {
     let activo = true;
@@ -78,6 +82,43 @@ export default function Unidades() {
     }
   }
 
+  function abrirLote() {
+    setLote(LOTE_VACIO);
+    setErrorLote('');
+    setLoteAbierto(true);
+  }
+
+  function actualizarLote(e) {
+    setLote({ ...lote, [e.target.name]: e.target.value });
+  }
+
+  async function guardarLote(e) {
+    e.preventDefault();
+    setErrorLote('');
+    setExito('');
+    setGuardando(true);
+
+    try {
+      const r = await peticion('/unidades/lote', { metodo: 'POST', datos: lote });
+      setExito(
+        r.omitidas > 0
+          ? `Se crearon ${r.creadas} unidades (${r.omitidas} ya existían)`
+          : `Se crearon ${r.creadas} unidades`
+      );
+      setLoteAbierto(false);
+      recargar();
+    } catch (err) {
+      setErrorLote(err.message);
+    } finally {
+      setGuardando(false);
+    }
+  }
+
+  const cantidadLote =
+    Number(lote.hasta) >= Number(lote.desde) && Number(lote.desde) >= 1
+      ? Number(lote.hasta) - Number(lote.desde) + 1
+      : 0;
+
   async function eliminar(unidad) {
     const nombre = unidad.torre ? `${unidad.torre}-${unidad.numero}` : unidad.numero;
     const confirmado = window.confirm(
@@ -103,9 +144,14 @@ export default function Unidades() {
           <h1>Unidades</h1>
           <p>Casas o departamentos registrados en tu conjunto.</p>
         </div>
-        <button className="boton" onClick={abrirNueva}>
-          + Nueva unidad
-        </button>
+        <div className="encabezado-acciones">
+          <button className="boton-secundario" onClick={abrirLote}>
+            + Varias unidades
+          </button>
+          <button className="boton" onClick={abrirNueva}>
+            + Nueva unidad
+          </button>
+        </div>
       </div>
 
       {error && <div className="mensaje-error">{error}</div>}
@@ -193,6 +239,70 @@ export default function Unidades() {
               </button>
               <button type="submit" className="boton" disabled={guardando}>
                 {guardando ? 'Guardando...' : 'Guardar'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
+
+      {loteAbierto && (
+        <Modal titulo="Crear varias unidades" onCerrar={() => setLoteAbierto(false)}>
+          <form onSubmit={guardarLote}>
+            {errorLote && <div className="mensaje-error">{errorLote}</div>}
+
+            <div className="campo">
+              <label htmlFor="lote-torre">Torre o bloque (opcional)</label>
+              <input id="lote-torre" name="torre" value={lote.torre} onChange={actualizarLote} />
+            </div>
+
+            <div className="campo">
+              <label htmlFor="lote-desde">Desde el número</label>
+              <input
+                id="lote-desde"
+                name="desde"
+                type="number"
+                min="1"
+                value={lote.desde}
+                onChange={actualizarLote}
+                required
+              />
+            </div>
+
+            <div className="campo">
+              <label htmlFor="lote-hasta">Hasta el número</label>
+              <input
+                id="lote-hasta"
+                name="hasta"
+                type="number"
+                min="1"
+                value={lote.hasta}
+                onChange={actualizarLote}
+                required
+              />
+            </div>
+
+            <div className="campo">
+              <label htmlFor="lote-tipo">Tipo</label>
+              <select id="lote-tipo" name="tipo" value={lote.tipo} onChange={actualizarLote}>
+                <option value="casa">Casa</option>
+                <option value="departamento">Departamento</option>
+              </select>
+            </div>
+
+            {cantidadLote > 0 && (
+              <p className="texto-suave">Se crearán {cantidadLote} unidades.</p>
+            )}
+
+            <div className="modal-acciones">
+              <button
+                type="button"
+                className="boton-secundario"
+                onClick={() => setLoteAbierto(false)}
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="boton" disabled={guardando}>
+                {guardando ? 'Creando...' : 'Crear unidades'}
               </button>
             </div>
           </form>
