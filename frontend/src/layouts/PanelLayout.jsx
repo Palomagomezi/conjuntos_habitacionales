@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 import '../styles/panel.css';
@@ -28,37 +29,57 @@ const MENUS = {
 export default function PanelLayout() {
   const { usuario, cerrarSesion } = useAuth();
   const enlaces = MENUS[usuario.rol] || [];
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  function cerrarMenu() {
+    setMenuAbierto(false);
+  }
 
   return (
     <div className="panel">
       <aside className="panel-menu">
-        <p className="panel-marca">Conjuntos habitacionales</p>
-        <p className="panel-rol">
-          {usuario.rol === 'administrador' ? 'Administrador' : 'Residente'}
-        </p>
-
-        <nav className="panel-enlaces">
-          {enlaces.map((enlace) => (
-            <NavLink
-              key={enlace.ruta}
-              to={enlace.ruta}
-              end={enlace.exacta}
-              className="panel-enlace"
-            >
-              {enlace.texto}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="panel-usuario">
-          <p className="panel-usuario-nombre">{usuario.nombre}</p>
-          <p className="panel-usuario-correo">{usuario.correo}</p>
-          <NavLink to="/cambiar-password" className="panel-enlace">
-            Cambiar contraseña
-          </NavLink>
-          <button className="panel-salir" onClick={cerrarSesion}>
-            Cerrar sesión
+        <div className="panel-cabecera">
+          <div>
+            <p className="panel-marca">Conjuntos habitacionales</p>
+            <p className="panel-rol">
+              {usuario.rol === 'administrador' ? 'Administrador' : 'Residente'}
+            </p>
+          </div>
+          <button
+            className="panel-boton-menu"
+            onClick={() => setMenuAbierto(!menuAbierto)}
+            aria-expanded={menuAbierto}
+            aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
+          >
+            {menuAbierto ? '✕' : '☰'}
           </button>
+        </div>
+
+        <div className={`panel-desplegable ${menuAbierto ? 'abierto' : ''}`}>
+          <nav className="panel-enlaces">
+            {enlaces.map((enlace) => (
+              <NavLink
+                key={enlace.ruta}
+                to={enlace.ruta}
+                end={enlace.exacta}
+                className="panel-enlace"
+                onClick={cerrarMenu}
+              >
+                {enlace.texto}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="panel-usuario">
+            <p className="panel-usuario-nombre">{usuario.nombre}</p>
+            <p className="panel-usuario-correo">{usuario.correo}</p>
+            <NavLink to="/cambiar-password" className="panel-enlace" onClick={cerrarMenu}>
+              Cambiar contraseña
+            </NavLink>
+            <button className="panel-salir" onClick={cerrarSesion}>
+              Cerrar sesión
+            </button>
+          </div>
         </div>
       </aside>
 

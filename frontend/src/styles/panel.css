@@ -13,6 +13,13 @@
   padding: 1.5rem 1rem;
 }
 
+.panel-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 .panel-marca {
   font-size: 0.95rem;
   font-weight: 600;
@@ -26,6 +33,25 @@
   color: #bdb5a9;
   margin: 0 0 1.75rem;
   padding: 0 0.5rem;
+}
+
+.panel-boton-menu {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 8px;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.panel-desplegable {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .panel-enlaces {
@@ -119,6 +145,12 @@
   font-size: 0.9rem;
 }
 
+.encabezado-acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .tarjetas-inicio {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -152,25 +184,36 @@
 
   .panel-menu {
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .panel-rol {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
-  .panel-enlaces {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .panel-boton-menu {
+    display: block;
+  }
+
+  .panel-desplegable {
+    display: none;
+  }
+
+  .panel-desplegable.abierto {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .panel-enlace {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .panel-usuario {
+    margin-top: 1rem;
   }
 
   .panel-contenido {
     padding: 1.25rem;
   }
-}
-
-.encabezado-acciones {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
 }
