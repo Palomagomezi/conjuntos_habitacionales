@@ -62,9 +62,11 @@ export default function Login() {
         </button>
       </form>
 
-      <p className="auth-pie">
-        ¿Administras un conjunto? <Link to="/registro">Registra tu conjunto</Link>
-      </p>
+      {import.meta.env.VITE_REGISTRO_ABIERTO === 'true' && (
+        <p className="auth-pie">
+          ¿Administras un conjunto? <Link to="/registro">Registra tu conjunto</Link>
+        </p>
+      )}
     </AuthLayout>
   );
 }

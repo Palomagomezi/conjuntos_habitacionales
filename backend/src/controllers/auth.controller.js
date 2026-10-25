@@ -21,6 +21,10 @@ function datosPublicos(usuario) {
 }
 
 export async function registrarAdministrador(req, res) {
+  if (process.env.REGISTRO_ABIERTO !== 'true') {
+    return res.status(403).json({ mensaje: 'El registro de nuevos conjuntos está cerrado' });
+  }
+
   const { nombreConjunto, nombre, correo, password } = req.body;
 
   if (!nombreConjunto || !nombre || !correo || !password) {
