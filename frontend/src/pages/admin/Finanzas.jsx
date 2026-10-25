@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { peticion } from '../../services/api';
+import { SelectorMes } from '../../components/SelectorFecha';
 import { dinero, formatoFecha, formatoPeriodo, mesActual } from '../../utils/formato';
 
 const CATEGORIAS = {
@@ -54,7 +55,7 @@ export default function Finanzas() {
       <div className="filtros">
         <div className="campo">
           <label htmlFor="mes">Mes</label>
-          <input id="mes" type="month" value={mes} onChange={(e) => setMes(e.target.value)} />
+          <SelectorMes id="mes" value={mes} onChange={(e) => setMes(e.target.value)} />
         </div>
       </div>
 

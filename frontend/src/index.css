@@ -680,3 +680,20 @@ body {
     border-bottom: 1px solid var(--color-borde);
   }
 }
+
+.selector-fecha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selector-fecha select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.selector-hora {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}

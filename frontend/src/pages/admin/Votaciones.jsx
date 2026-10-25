@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
+import { SelectorFechaHora } from '../../components/SelectorFecha';
 import ResultadosVotacion from '../../components/ResultadosVotacion';
 import { ahoraLocal, formatoFechaHora } from '../../utils/formato';
 
@@ -213,10 +214,9 @@ export default function Votaciones() {
 
             <div className="campo">
               <label htmlFor="fecha_cierre">Fecha y hora de cierre</label>
-              <input
+              <SelectorFechaHora
                 id="fecha_cierre"
                 name="fecha_cierre"
-                type="datetime-local"
                 min={ahoraLocal()}
                 value={form.fecha_cierre}
                 onChange={actualizar}

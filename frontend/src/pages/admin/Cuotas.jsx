@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
+import { SelectorFecha, SelectorMes } from '../../components/SelectorFecha';
 import {
   dinero,
   formatoFecha,
@@ -175,9 +176,8 @@ export default function Cuotas() {
       <div className="filtros">
         <div className="campo">
           <label htmlFor="periodo">Mes</label>
-          <input
+          <SelectorMes
             id="periodo"
-            type="month"
             value={periodo}
             onChange={(e) => setPeriodo(e.target.value)}
           />
@@ -268,10 +268,9 @@ export default function Cuotas() {
 
             <div className="campo">
               <label htmlFor="periodoCuota">Mes</label>
-              <input
+              <SelectorMes
                 id="periodoCuota"
                 name="periodo"
-                type="month"
                 value={formGenerar.periodo}
                 onChange={actualizarGenerar}
                 required
@@ -294,10 +293,9 @@ export default function Cuotas() {
 
             <div className="campo">
               <label htmlFor="fechaLimite">Fecha límite de pago</label>
-              <input
+              <SelectorFecha
                 id="fechaLimite"
                 name="fechaLimite"
-                type="date"
                 value={formGenerar.fechaLimite}
                 onChange={actualizarGenerar}
                 required
@@ -351,10 +349,9 @@ export default function Cuotas() {
 
             <div className="campo">
               <label htmlFor="fechaPago">Fecha del pago</label>
-              <input
+              <SelectorFecha
                 id="fechaPago"
                 name="fechaPago"
-                type="date"
                 max={fechaHoy}
                 value={formPago.fechaPago}
                 onChange={actualizarPago}

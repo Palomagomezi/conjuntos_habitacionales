@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
+import { SelectorFecha, SelectorMes } from '../../components/SelectorFecha';
 import { dinero, formatoFecha, hoy, mesActual } from '../../utils/formato';
 
 const CATEGORIAS = {
@@ -123,7 +124,7 @@ export default function Egresos() {
       <div className="filtros">
         <div className="campo">
           <label htmlFor="mes">Mes</label>
-          <input id="mes" type="month" value={mes} onChange={(e) => setMes(e.target.value)} />
+          <SelectorMes id="mes" value={mes} onChange={(e) => setMes(e.target.value)} />
         </div>
         <p className="texto-suave">
           {egresos.length} {egresos.length === 1 ? 'egreso' : 'egresos'} · {dinero(total)} en
@@ -216,10 +217,9 @@ export default function Egresos() {
 
             <div className="campo">
               <label htmlFor="fecha">Fecha</label>
-              <input
+                <SelectorFecha
                 id="fecha"
                 name="fecha"
-                type="date"
                 max={hoy()}
                 value={form.fecha}
                 onChange={actualizar}

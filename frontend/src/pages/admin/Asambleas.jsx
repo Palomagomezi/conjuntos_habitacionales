@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { peticion } from '../../services/api';
 import Modal from '../../components/Modal';
+import { SelectorFechaHora } from '../../components/SelectorFecha';
 import TarjetaAsamblea from '../../components/TarjetaAsamblea';
 import { ahoraLocal } from '../../utils/formato';
 
@@ -171,10 +172,9 @@ export default function Asambleas() {
 
             <div className="campo">
               <label htmlFor="fecha">Fecha y hora</label>
-              <input
+              <SelectorFechaHora
                 id="fecha"
                 name="fecha"
-                type="datetime-local"
                 min={ahoraLocal()}
                 value={form.fecha}
                 onChange={actualizar}

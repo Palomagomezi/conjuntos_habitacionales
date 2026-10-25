@@ -61,7 +61,10 @@ export async function listarMovimientos(req, res) {
   try {
     const resultado = await pool.query(
       `SELECT 'ingreso' AS tipo, p.id, p.fecha_pago AS fecha,
-              c.concepto || ' ' || c.periodo ||
+              c.concepto || ' ' ||
+                (ARRAY['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                       'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'])
+                  [split_part(c.periodo, '-', 2)::int] || ' ' || split_part(c.periodo, '-', 1) ||
                 ' (' || CASE WHEN u.torre = '' THEN u.numero ELSE u.torre || '-' || u.numero END || ')'
                 AS concepto,
               p.monto, co.folio AS detalle
