@@ -1,7 +1,8 @@
+import { leerDelNavegador, borrarDelNavegador } from '../utils/sesion';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export async function peticion(ruta, { metodo = 'GET', datos } = {}) {
-  const token = localStorage.getItem('token');
+  const token = leerDelNavegador('token');
 
   const respuesta = await fetch(`${API_URL}${ruta}`, {
     method: metodo,
@@ -15,8 +16,7 @@ export async function peticion(ruta, { metodo = 'GET', datos } = {}) {
   const contenido = await respuesta.json().catch(() => ({}));
 
    if (respuesta.status === 401 && token) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
+    borrarDelNavegador();
     window.location.href = '/login';
     return;
   }
