@@ -58,6 +58,8 @@ export async function listarMovimientos(req, res) {
     return res.status(400).json({ mensaje: 'El mes es obligatorio (AAAA-MM)' });
   }
 
+  const esAdmin = req.usuario.rol === 'administrador';
+
   try {
     const resultado = await pool.query(
       `SELECT 'ingreso' AS tipo, p.id, p.fecha_pago AS fecha,
@@ -65,9 +67,12 @@ export async function listarMovimientos(req, res) {
                 (ARRAY['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
                        'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'])
                   [split_part(c.periodo, '-', 2)::int] || ' ' || split_part(c.periodo, '-', 1) ||
-                ' (' || CASE WHEN u.torre = '' THEN u.numero ELSE u.torre || '-' || u.numero END || ')'
+                CASE WHEN $3::boolean
+                  THEN ' (' || CASE WHEN u.torre = '' THEN u.numero ELSE u.torre || '-' || u.numero END || ')'
+                  ELSE '' END
                 AS concepto,
-              p.monto, co.folio AS detalle
+              p.monto,
+              CASE WHEN $3::boolean THEN co.folio ELSE NULL END AS detalle
        FROM pagos p
        JOIN cuotas c ON c.id = p.cuota_id
        JOIN unidades u ON u.id = c.unidad_id
@@ -81,7 +86,7 @@ export async function listarMovimientos(req, res) {
        WHERE e.conjunto_id = $1 AND to_char(e.fecha, 'YYYY-MM') = $2
 
        ORDER BY fecha DESC, tipo`,
-      [req.usuario.conjunto_id, mes]
+      [req.usuario.conjunto_id, mes, esAdmin]
     );
     res.json(resultado.rows);
   } catch (error) {

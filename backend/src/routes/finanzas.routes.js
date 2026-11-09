@@ -10,8 +10,8 @@ const router = Router();
 
 router.use(verificarToken);
 
-router.get('/resumen', soloRol('administrador'), obtenerResumen);
-router.get('/movimientos', soloRol('administrador'), listarMovimientos);
+router.get('/resumen', obtenerResumen);
+router.get('/movimientos', listarMovimientos);
 router.get('/estado-cuenta', soloRol('residente'), obtenerEstadoCuenta);
 
 export default router;

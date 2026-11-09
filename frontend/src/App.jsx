@@ -22,6 +22,7 @@ import AvisosResidente from './pages/residente/AvisosResidente';
 import AsambleasResidente from './pages/residente/AsambleasResidente';
 import VotacionesResidente from './pages/residente/VotacionesResidente';
 import MisReportes from './pages/residente/MisReportes';
+import FinanzasConjunto from './pages/residente/FinanzasConjunto';
 
 export default function App() {
   return (
@@ -64,6 +65,7 @@ export default function App() {
           >
             <Route index element={<InicioResidente />} />
             <Route path="estado-cuenta" element={<EstadoCuenta />} />
+            <Route path="finanzas" element={<FinanzasConjunto />} />
             <Route path="avisos" element={<AvisosResidente />} />
             <Route path="asambleas" element={<AsambleasResidente />} />
             <Route path="votaciones" element={<VotacionesResidente />} />

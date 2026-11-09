@@ -19,6 +19,7 @@ const MENUS = {
   residente: [
     { ruta: '/residente', texto: 'Inicio', exacta: true },
     { ruta: '/residente/estado-cuenta', texto: 'Estado de cuenta' },
+    { ruta: '/residente/finanzas', texto: 'Finanzas del conjunto' },
     { ruta: '/residente/avisos', texto: 'Avisos' },
     { ruta: '/residente/asambleas', texto: 'Asambleas' },
     { ruta: '/residente/votaciones', texto: 'Votaciones' },
