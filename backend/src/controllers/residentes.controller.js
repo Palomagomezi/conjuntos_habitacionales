@@ -117,3 +117,29 @@ export async function cambiarEstadoResidente(req, res) {
     res.status(500).json({ mensaje: 'Error al cambiar el estado del residente' });
   }
 }
+
+export async function restablecerPasswordResidente(req, res) {
+  const { passwordTemporal } = req.body;
+
+  if (!passwordTemporal || passwordTemporal.length < 8) {
+    return res.status(400).json({ mensaje: 'La contraseña temporal debe tener al menos 8 caracteres' });
+  }
+
+  try {
+    const hash = await bcrypt.hash(passwordTemporal, 10);
+    const resultado = await pool.query(
+      `UPDATE usuarios SET password_hash = $1, debe_cambiar_password = TRUE
+       WHERE id = $2 AND conjunto_id = $3 AND rol = 'residente'
+       RETURNING id, nombre`,
+      [hash, req.params.id, req.usuario.conjunto_id]
+    );
+
+    if (resultado.rowCount === 0) {
+      return res.status(404).json({ mensaje: 'Residente no encontrado' });
+    }
+    res.json({ mensaje: 'Contraseña restablecida correctamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al restablecer la contraseña' });
+  }
+}

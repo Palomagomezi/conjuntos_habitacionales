@@ -130,6 +130,30 @@ export default function Residentes() {
       setError(err.message);
     }
   }
+  async function restablecerPassword(residente) {
+    const nueva = window.prompt(
+      `Escribe una contraseña temporal para ${residente.nombre} (mínimo 8 caracteres). Se le pedirá cambiarla al entrar.`
+    );
+    if (nueva === null) return;
+    if (nueva.length < 8) {
+      setError('La contraseña temporal debe tener al menos 8 caracteres');
+      return;
+    }
+
+    setError('');
+    setExito('');
+    try {
+      await peticion(`/residentes/${residente.id}/password`, {
+        metodo: 'PATCH',
+        datos: { passwordTemporal: nueva },
+      });
+      setExito(
+        `Contraseña restablecida. Comparte con ${residente.nombre} la contraseña temporal; se le pedirá cambiarla al entrar.`
+      );
+    } catch (err) {
+      setError(err.message);
+    }
+  }
 
   return (
     <>
@@ -187,6 +211,11 @@ export default function Residentes() {
                     <button className="boton-enlace" onClick={() => abrirEditar(residente)}>
                       Editar
                     </button>
+                    {residente.activo && (
+                      <button className="boton-enlace" onClick={() => restablecerPassword(residente)}>
+                        Restablecer contraseña
+                      </button>
+                    )}
                     <button
                       className={residente.activo ? 'boton-enlace peligro' : 'boton-enlace'}
                       onClick={() => cambiarEstado(residente)}

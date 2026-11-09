@@ -5,6 +5,7 @@ import {
   crearResidente,
   actualizarResidente,
   cambiarEstadoResidente,
+  restablecerPasswordResidente,
 } from '../controllers/residentes.controller.js';
 
 const router = Router();
@@ -15,5 +16,6 @@ router.get('/', listarResidentes);
 router.post('/', crearResidente);
 router.put('/:id', actualizarResidente);
 router.patch('/:id/estado', cambiarEstadoResidente);
+router.patch('/:id/password', restablecerPasswordResidente);
 
 export default router;
